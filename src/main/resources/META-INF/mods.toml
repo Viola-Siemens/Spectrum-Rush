@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="spectrum_rush"
+version="${file.jarVersion}"
+displayName="Spectrum Rush"
+credits="Liu Dongyu"
+authors="Hexagram"
+description='''
+A mod for mini-game Spectrum Rush.
+'''
+
+[[dependencies.spectrum_rush]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.spectrum_rush]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"

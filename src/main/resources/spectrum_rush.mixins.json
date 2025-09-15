@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.hexagram2021.spectrum_rush.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "spectrum_rush.refmap.json",
+  "mixins": [
+    "MobSpawnTypeMixin"
+  ],
+  "minVersion": "0.8",
+  "client": [
+  ]
+}

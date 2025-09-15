@@ -1,0 +1,64 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36" version="28.2.1">
+  <diagram name="第 1 页" id="EaXB5GfvL8YvalaSGVoG">
+    <mxGraphModel dx="1072" dy="1737" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9MqYjjXePN31bmmTb5YA-1" value="&lt;h1 style=&quot;box-sizing: border-box; break-after: avoid-page; break-inside: avoid; orphans: 4; margin-top: 1rem; margin-bottom: 1rem; position: relative; line-height: 1.2; cursor: text; border-bottom: 1px solid rgb(238, 238, 238); white-space-collapse: preserve; color: rgb(51, 51, 51); font-family: &amp;quot;Open Sans&amp;quot;, &amp;quot;Clear Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, Helvetica, Arial, &amp;quot;Segoe UI Emoji&amp;quot;, sans-serif; text-align: start;&quot; class=&quot;md-end-block md-heading md-focus&quot;&gt;&lt;span style=&quot;box-sizing: border-box;&quot; class=&quot;md-plain md-expand&quot;&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;Spectrum Rush&lt;/font&gt;&lt;/span&gt;&lt;/h1&gt;" style="swimlane;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry width="540" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-2" value="Game Setup &amp;amp; Logic" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-1">
+          <mxGeometry x="20" y="40" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-3" value="World Generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-2">
+          <mxGeometry x="10" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-4" value="Color Assignment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-2">
+          <mxGeometry x="130" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-5" value="Game Trigger" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-2">
+          <mxGeometry x="10" y="100" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-6" value="Scoring System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-2">
+          <mxGeometry x="130" y="100" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-7" value="Gameplay Loop" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-1">
+          <mxGeometry x="280" y="40" width="240" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-8" value="Instruction Period" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-7">
+          <mxGeometry x="10" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-9" value="Round End" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-7">
+          <mxGeometry x="130" y="100" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-10" value="Wool Validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-7">
+          <mxGeometry x="10" y="100" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-11" value="Collection Phase" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-7">
+          <mxGeometry x="130" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-20" value="Victory Condition" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-7">
+          <mxGeometry x="10" y="160" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-12" value="User Interface &amp;amp; Feedback" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-1">
+          <mxGeometry x="20" y="220" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-13" value="HUD Elements" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-12">
+          <mxGeometry x="10" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-14" value="Chat Messages" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-12">
+          <mxGeometry x="130" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-15" value="Scoreboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-12">
+          <mxGeometry x="10" y="100" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-16" value="Configuration" style="swimlane;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-1">
+          <mxGeometry x="280" y="280" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="9MqYjjXePN31bmmTb5YA-17" value="Configuration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;" vertex="1" parent="9MqYjjXePN31bmmTb5YA-16">
+          <mxGeometry x="10" y="40" width="100" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
