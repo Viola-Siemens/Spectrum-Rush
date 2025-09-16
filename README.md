@@ -130,7 +130,7 @@ Nope.
     <tr>
         <td>Scoring System</td>
         <td><span style="color:orchid;font-weight:600">P1</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td rowspan="5">Gameplay Loop</td>
@@ -146,12 +146,12 @@ Nope.
     <tr>
         <td>Wool Validation</td>
         <td><span style="color:red;font-weight:900">P0</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Round End</td>
         <td><span style="color:deepskyblue">P2</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Victory Condition</td>
@@ -172,13 +172,13 @@ Nope.
     <tr>
         <td>Scoreboard</td>
         <td><span style="color:deepskyblue">P2</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td rowspan="3">Configuration</td>
         <td>Configuration</td>
         <td><span style="color:deepskyblue">P2</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
 </table>
 
