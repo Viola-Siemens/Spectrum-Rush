@@ -12,9 +12,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.BossEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -38,6 +40,11 @@ public final class SRGame {
 
 	private static final String SCORE_NAME = "spectrum_rush:score";
 	private static final UUID SPEED_MODIFIER_SHEEP_UUID = UUID.fromString("53e053ac-cdcb-45bd-b857-0b1cdd281432");
+
+	private static final ServerBossEvent bossEvent = new ServerBossEvent(
+			Component.literal(currentColor.getSerializedName()).withStyle(Style.EMPTY.withColor(currentColor.getTextColor())),
+			BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS
+	);
 
 	private static final EnumMap<DyeColor, Item> SHEEP_WOOLS = Util.make(new EnumMap<>(DyeColor.class), map -> {
 		map.put(DyeColor.BLACK, Items.BLACK_WOOL);
@@ -69,7 +76,7 @@ public final class SRGame {
 		SRCommonConfig.STARTED.save();
 		Collection<? extends Sheep> entities = level.getEntities(EntityTypeTest.forClass(Sheep.class), entity -> true);
 		for(Sheep entity : entities) {
-			entity.kill();
+			entity.discard();
 		}
 		BlockPos spawnPos = level.getSharedSpawnPos();
 		int maxSpawnRadius = SRCommonConfig.MAX_SPAWN_RADIUS.get();
@@ -95,9 +102,15 @@ public final class SRGame {
 
 		Scoreboard scoreboard = level.getScoreboard();
 		Objective objective = scoreboard.addObjective(SCORE_NAME, ObjectiveCriteria.DUMMY, Component.literal("Spectrum Rush Score"), ObjectiveCriteria.RenderType.INTEGER);
-		level.players().forEach(player -> scoreboard.getOrCreatePlayerScore(player.getDisplayName().getString(), objective).setScore(0));
+		level.players().forEach(player -> {
+			player.getInventory().clearOrCountMatchingItems(itemStack -> SHEEP_WOOLS.containsValue(itemStack.getItem()),-1, player.inventoryMenu.getCraftSlots());
+			player.addItem(new ItemStack(Items.SHEARS));
+			scoreboard.getOrCreatePlayerScore(player.getDisplayName().getString(), objective).setScore(0);
+			bossEvent.addPlayer(player);
+		});
+		scoreboard.setDisplayObjective(Scoreboard.DISPLAY_SLOT_SIDEBAR, objective);
 
-		remainingRounds = SRCommonConfig.TOTAL_ROUNDS.get();
+		remainingRounds = SRCommonConfig.TOTAL_ROUNDS.get() - 1;
 		roundRemainingTicks = SRCommonConfig.EACH_ROUND_TICKS.get();
 		currentColor = DyeColor.byName(SRCommonConfig.SHEEP_COLORS.get().get(level.random.nextInt(SRCommonConfig.SHEEP_COLORS.get().size())), DyeColor.BLACK);
 		return sendMessage(level);
@@ -132,15 +145,15 @@ public final class SRGame {
 		}
 		if(roundRemainingTicks > 0) {
 			--roundRemainingTicks;
+			bossEvent.setProgress(roundRemainingTicks / (float) SRCommonConfig.EACH_ROUND_TICKS.get());
+		} else if(remainingRounds > 0) {
+			--remainingRounds;
+			roundRemainingTicks = SRCommonConfig.EACH_ROUND_TICKS.get();
+			currentColor = DyeColor.byName(SRCommonConfig.SHEEP_COLORS.get().get(level.random.nextInt(SRCommonConfig.SHEEP_COLORS.get().size())), DyeColor.BLACK);
+			level.players().forEach(player -> player.getInventory().clearOrCountMatchingItems(itemStack -> SHEEP_WOOLS.containsValue(itemStack.getItem()),-1, player.inventoryMenu.getCraftSlots()));
+			sendMessage(level);
 		} else {
-			if(remainingRounds > 0) {
-				--remainingRounds;
-				roundRemainingTicks = SRCommonConfig.EACH_ROUND_TICKS.get();
-				currentColor = DyeColor.byName(SRCommonConfig.SHEEP_COLORS.get().get(level.random.nextInt(SRCommonConfig.SHEEP_COLORS.get().size())), DyeColor.BLACK);
-				sendMessage(level);
-			} else {
-				stopGame(level);
-			}
+			stopGame(level);
 		}
 	}
 
@@ -155,7 +168,7 @@ public final class SRGame {
 		SRCommonConfig.STARTED.save();
 		Collection<? extends Sheep> entities = level.getEntities(EntityTypeTest.forClass(Sheep.class), entity -> entity.getSpawnType() == SRSpawnTypes.SPECTRUM_RUSH);
 		for(Sheep entity : entities) {
-			entity.kill();
+			entity.discard();
 		}
 		Scoreboard scoreboard = level.getScoreboard();
 		Objective objective = scoreboard.getObjective(SCORE_NAME);
@@ -169,7 +182,7 @@ public final class SRGame {
 				limit = 5;
 			} else if(playerScoreList.size() > 3 && playerScoreList.get(2).score() > 0) {
 				limit = 3;
-			} else if(playerScoreList.size() > 1 && playerScoreList.get(0).score() > 0) {
+			} else if(!playerScoreList.isEmpty() && playerScoreList.get(0).score() > 0) {
 				limit = 1;
 			}
 			if(limit > 0) {
@@ -182,6 +195,7 @@ public final class SRGame {
 					player.sendSystemMessage(Component.literal("Congratulations to " + playerScoreList.get(0).name() + "!").withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 				});
 			}
+			scoreboard.setDisplayObjective(Scoreboard.DISPLAY_SLOT_SIDEBAR, null);
 			scoreboard.removeObjective(objective);
 		}
 		return Command.SINGLE_SUCCESS;
@@ -192,6 +206,8 @@ public final class SRGame {
 	 * @return 命令执行成功返回 1
 	 */
 	public static int sendMessage(ServerLevel level) {
+		bossEvent.setName(Component.literal(currentColor.getSerializedName()).withStyle(Style.EMPTY.withColor(currentColor.getTextColor())));
+		bossEvent.setProgress(roundRemainingTicks / (float) SRCommonConfig.EACH_ROUND_TICKS.get());
 		level.players().forEach(player -> {
 			player.connection.send(new ClientboundSetTitleTextPacket(
 					Component.translatable("block.minecraft.%s_wool".formatted(currentColor.getSerializedName())).withStyle(Style.EMPTY.withColor(currentColor.getTextColor()))
