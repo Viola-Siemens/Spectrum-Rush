@@ -8,10 +8,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -103,6 +104,7 @@ public final class SRGame {
 		Scoreboard scoreboard = level.getScoreboard();
 		Objective objective = scoreboard.addObjective(SCORE_NAME, ObjectiveCriteria.DUMMY, Component.literal("Spectrum Rush Score"), ObjectiveCriteria.RenderType.INTEGER);
 		level.players().forEach(player -> {
+			player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.PLAYER_LEVELUP), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, 0L));
 			player.getInventory().clearOrCountMatchingItems(itemStack -> SHEEP_WOOLS.containsValue(itemStack.getItem()),-1, player.inventoryMenu.getCraftSlots());
 			player.addItem(new ItemStack(Items.SHEARS));
 			scoreboard.getOrCreatePlayerScore(player.getDisplayName().getString(), objective).setScore(0);
@@ -139,7 +141,7 @@ public final class SRGame {
 					}
 				}
 				if(flag) {
-					level.playSeededSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.NOTE_BLOCK_HARP, SoundSource.RECORDS, 3.0F, 1.0F, level.random.nextLong());
+					player.connection.send(new ClientboundSoundPacket(SoundEvents.NOTE_BLOCK_PLING, SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 2.0F, 1.0F, 0L));
 				}
 			});
 		}
@@ -191,6 +193,7 @@ public final class SRGame {
 					stringBuilder.append("Top ").append(i + 1).append(": ").append(playerScore.name()).append(" (").append(playerScore.score()).append(")\n");
 				}
 				level.players().forEach(player -> {
+					player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.FIREWORK_ROCKET_LARGE_BLAST_FAR), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, 0L));
 					player.sendSystemMessage(Component.literal(stringBuilder.toString()));
 					player.sendSystemMessage(Component.literal("Congratulations to " + playerScoreList.get(0).name() + "!").withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD));
 				});
@@ -198,6 +201,7 @@ public final class SRGame {
 			scoreboard.setDisplayObjective(Scoreboard.DISPLAY_SLOT_SIDEBAR, null);
 			scoreboard.removeObjective(objective);
 		}
+		bossEvent.removeAllPlayers();
 		return Command.SINGLE_SUCCESS;
 	}
 
@@ -212,9 +216,7 @@ public final class SRGame {
 			player.connection.send(new ClientboundSetTitleTextPacket(
 					Component.translatable("block.minecraft.%s_wool".formatted(currentColor.getSerializedName())).withStyle(Style.EMPTY.withColor(currentColor.getTextColor()))
 			));
-			player.connection.send(new ClientboundSetSubtitleTextPacket(
-					Component.literal(SRCommonConfig.SUBTITLE_MESSAGE.get().formatted((roundRemainingTicks + 1) / SharedConstants.TICKS_PER_SECOND, currentColor.getSerializedName()))
-			));
+			player.sendSystemMessage(Component.literal(SRCommonConfig.SUBTITLE_MESSAGE.get().formatted((roundRemainingTicks + 1) / SharedConstants.TICKS_PER_SECOND, currentColor.getSerializedName())));
 		});
 		return Command.SINGLE_SUCCESS;
 	}

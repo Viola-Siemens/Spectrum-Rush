@@ -37,7 +37,7 @@ public class SRCommonConfig {
 				TOTAL_ROUNDS = BUILDER.comment("How many rounds will we play.").defineInRange("TOTAL_ROUNDS", 10, 0, 100);
 				COUNT_SHEEP_EACH_COLOR = BUILDER.comment("The count of sheep each color.").defineInRange("COUNT_SHEEP_EACH_COLOR", 10, 1, 100);
 				MAX_SPAWN_RADIUS = BUILDER.comment("The maximum spawn radius in blocks.").defineInRange("MAX_SPAWN_RADIUS", 160, 1, 1024);
-				SUBTITLE_MESSAGE = BUILDER.comment("The subtitle message when a round is started.").define("SUBTITLE_MESSAGE", "You have %d seconds to shear %s wools\nas many as possible.");
+				SUBTITLE_MESSAGE = BUILDER.comment("The subtitle message when a round is started.").define("SUBTITLE_MESSAGE", "You have %d seconds to shear %s wools as many as possible.");
 			BUILDER.pop();
 		BUILDER.pop();
 

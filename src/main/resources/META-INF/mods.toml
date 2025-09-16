@@ -6,8 +6,8 @@ license="MIT"
 modId="spectrum_rush"
 version="${file.jarVersion}"
 displayName="Spectrum Rush"
-credits="Liu Dongyu"
-authors="Hexagram"
+credits="Liu Dongyu, Fuli_kk"
+authors="Liu Dongyu, Fuli_kk"
 description='''
 A mod for mini-game Spectrum Rush.
 '''
