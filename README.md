@@ -115,17 +115,17 @@ Nope.
         <td rowspan="4">Game Setup &amp; Logic</td>
         <td>World Generation</td>
         <td><span style="color:red;font-weight:900">P0</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Color Assignment</td>
         <td><span style="color:red;font-weight:900">P0</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Game Trigger</td>
         <td><span style="color:deepskyblue">P2</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Scoring System</td>
@@ -136,12 +136,12 @@ Nope.
         <td rowspan="5">Gameplay Loop</td>
         <td>Instruction Period</td>
         <td><span style="color:red;font-weight:900">P0</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Collection Phase</td>
         <td><span style="color:red;font-weight:900">P0</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Wool Validation</td>

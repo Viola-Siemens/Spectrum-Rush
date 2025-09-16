@@ -135,7 +135,7 @@
     </tr>
     <tr>
     <td rowspan="5">游戏循环</td>
-    <td>指导阶段</td>
+    <td>指令阶段</td>
     <td><span style="color:red;font-weight:900">P0</span></td>
     <td><input type="checkbox"/></td>
     </tr>
@@ -186,6 +186,6 @@
     ### **6. 技术架构**
 
     - **目标 Minecraft 版本**：1.20.1
-    - **Mod 加载器**：Forge.
+    - **Mod 加载器**：Forge。
     - **Java 版本**：JDK 17
     - **关键依赖项**：无。

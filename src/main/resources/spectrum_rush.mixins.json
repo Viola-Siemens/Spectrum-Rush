@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "spectrum_rush.refmap.json",
   "mixins": [
-    "MobSpawnTypeMixin"
+    "MobSpawnTypeMixin",
+    "EatBlockGoalMixin"
   ],
   "minVersion": "0.8",
   "client": [

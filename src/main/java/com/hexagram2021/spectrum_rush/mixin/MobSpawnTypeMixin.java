@@ -22,8 +22,12 @@ public class MobSpawnTypeMixin {
 	@Shadow @Final @Mutable
 	private static MobSpawnType[] $VALUES;
 
+	/**
+	 * 添加 Spectrum Rush Spawn Type
+	 * @param ci	Callback Info
+	 */
 	@Inject(method = "<clinit>()V", at = @At(value = "FIELD", shift = At.Shift.AFTER, target = "Lnet/minecraft/world/entity/MobSpawnType;$VALUES:[Lnet/minecraft/world/entity/MobSpawnType;"))
-	private static void emeraldcraft$injectEnum(CallbackInfo ci) {
+	private static void spectrum_rush$injectEnum(CallbackInfo ci) {
 		int ordinal = $VALUES.length;
 		$VALUES = Arrays.copyOf($VALUES, ordinal + 1);
 
