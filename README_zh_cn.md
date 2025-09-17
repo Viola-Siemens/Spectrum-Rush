@@ -9,8 +9,8 @@
   **状态：**
 
   - [x] 草稿
-  - [ ] 审核中
-  - [ ] 已批准
+  - [x] 审核中
+  - [x] 已批准
 
   **问题跟踪器：** [https://github.com/Viola-Siemens/Spectrum-Rush/issues](https://github.com/Viola-Siemens/Spectrum-Rush/issues)
 

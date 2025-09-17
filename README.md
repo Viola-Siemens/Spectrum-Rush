@@ -9,8 +9,8 @@
 **Status:**
 
 - [x] Draft
-- [ ] In Review
-- [ ] Approved
+- [x] In Review
+- [x] Approved
 
 **Issue Tracker:** [https://github.com/Viola-Siemens/Spectrum-Rush/issues](https://github.com/Viola-Siemens/Spectrum-Rush/issues)
 
@@ -21,9 +21,11 @@
 This document outlines the requirements for the development of the **Spectrum Rush** mod for Minecraft. It aims to create a fast-paced, competitive mini-game centered around shearing colored sheep, testing players' speed, memory, and coordination.
 
 **1.1. Problem Statement**
+
 Minecraft lacks built-in, structured mini-games that are quick to set up and offer a clear, objective-based competitive experience. While existing mods add complexity or new mobs, there is a gap for a simple, engaging, and visually distinct game that can be enjoyed in short sessions with friends.
 
 **1.2. Vision Statement**
+
 To create a vibrant and chaotic mini-game mod where players race against time and each other to collect the right colored wool, transforming the peaceful act of shearing into a thrilling competition.
 
 **1.3. Goals & Success Metrics**

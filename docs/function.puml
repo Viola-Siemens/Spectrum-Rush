@@ -1,0 +1,32 @@
+@startuml
+
+title Spectrum Rush
+
+skin rose
+
+actor Operator
+
+participant "game (server)" as server
+actor "player (client)" as client
+
+Operator -> server: Game Start
+server -> server: Kill Sheep & Spawn Sheep
+activate server
+loop round
+    server -> client: Send Quest
+    activate client
+    client --> server: Shear Sheep & Collect Wools
+    server -> server: Validate
+    alt valid
+        server -> client: Send Reward
+    end
+    deactivate client
+end
+
+Operator -> server: Game Stop
+server -> server: Calculate Score & Sort
+deactivate server
+server -> client: Send Ranking List
+
+
+@enduml
