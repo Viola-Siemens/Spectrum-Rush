@@ -105,6 +105,10 @@ public final class SRGame {
 		}
 
 		Scoreboard scoreboard = level.getScoreboard();
+		Objective oldObjective = scoreboard.getObjective(SCORE_NAME);
+		if(oldObjective != null) {
+			scoreboard.removeObjective(oldObjective);
+		}
 		Objective objective = scoreboard.addObjective(SCORE_NAME, ObjectiveCriteria.DUMMY, Component.literal("Spectrum Rush Score"), ObjectiveCriteria.RenderType.INTEGER);
 		level.players().forEach(player -> {
 			player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.PLAYER_LEVELUP), SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, 0L));
