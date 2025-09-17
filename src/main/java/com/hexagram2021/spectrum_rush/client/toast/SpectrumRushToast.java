@@ -31,22 +31,24 @@ public record SpectrumRushToast(DyeColor dyeColor, ItemStack wool) implements To
 		if (contentList.size() == 1) {
 			transform.drawString(toastComponent.getMinecraft().font, titleList.get(0), 30, 7, this.dyeColor.getTextColor(), false);
 			transform.drawString(toastComponent.getMinecraft().font, contentList.get(0), 30, 18, -1, false);
+			transform.renderFakeItem(this.wool, 8, 8);
 		} else {
+			contentList = toastComponent.getMinecraft().font.split(DESCRIPTION, 144);
 			if (ticks < 1500L) {
 				int k = Mth.floor(Mth.clamp((float) (1500L - ticks) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 0x04000000;
 				transform.drawString(toastComponent.getMinecraft().font, titleList.get(0), 30, 11, this.dyeColor.getTextColor() | k, false);
+				transform.renderFakeItem(this.wool, 8, 8);
 			} else {
 				int i1 = Mth.floor(Mth.clamp((float) (ticks - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 0x04000000;
-				int l = this.height() / 2 - titleList.size() * 9 / 2;
+				int l = this.height() / 2 - contentList.size() * 9 / 2;
 
-				for (FormattedCharSequence formattedcharsequence : titleList) {
-					transform.drawString(toastComponent.getMinecraft().font, formattedcharsequence, 30, l, 0xFFFFFF | i1, false);
+				for (FormattedCharSequence formattedcharsequence : contentList) {
+					transform.drawString(toastComponent.getMinecraft().font, formattedcharsequence, 8, l, 0xFFFFFF | i1, false);
 					l += 9;
 				}
 			}
 		}
 
-		transform.renderFakeItem(this.wool, 8, 8);
 		return (double) ticks >= DISPLAY_TIME * toastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
 	}
 }

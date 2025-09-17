@@ -24,6 +24,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -70,9 +71,13 @@ public final class SRGame {
 		assert level.dimension() == Level.OVERWORLD;
 		SRCommonConfig.STARTED.set(true);
 		SRCommonConfig.STARTED.save();
-		Collection<? extends Sheep> entities = level.getEntities(EntityTypeTest.forClass(Sheep.class), entity -> true);
-		for(Sheep entity : entities) {
-			entity.discard();
+		Collection<? extends Sheep> sheepList = level.getEntities(EntityTypeTest.forClass(Sheep.class), entity -> true);
+		for(Sheep sheep : sheepList) {
+			sheep.discard();
+		}
+		Collection<? extends ItemEntity> itemEntities = level.getEntities(EntityTypeTest.forClass(ItemEntity.class), entity -> Constants.SHEEP_WOOLS.containsValue(entity.getItem().getItem()));
+		for(ItemEntity itemEntity : itemEntities) {
+			itemEntity.discard();
 		}
 		BlockPos spawnPos = level.getSharedSpawnPos();
 		int maxSpawnRadius = SRCommonConfig.MAX_SPAWN_RADIUS.get();
@@ -152,6 +157,10 @@ public final class SRGame {
 			roundRemainingTicks = SRCommonConfig.EACH_ROUND_TICKS.get();
 			currentColor = DyeColor.byName(SRCommonConfig.SHEEP_COLORS.get().get(level.random.nextInt(SRCommonConfig.SHEEP_COLORS.get().size())), DyeColor.BLACK);
 			level.players().forEach(player -> player.getInventory().clearOrCountMatchingItems(itemStack -> Constants.SHEEP_WOOLS.containsValue(itemStack.getItem()),-1, player.inventoryMenu.getCraftSlots()));
+			Collection<? extends ItemEntity> itemEntities = level.getEntities(EntityTypeTest.forClass(ItemEntity.class), entity -> Constants.SHEEP_WOOLS.containsValue(entity.getItem().getItem()));
+			for(ItemEntity itemEntity : itemEntities) {
+				itemEntity.discard();
+			}
 			sendMessage(level);
 		} else {
 			stopGame(level);
