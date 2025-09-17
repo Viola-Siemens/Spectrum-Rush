@@ -156,18 +156,18 @@ Nope.
     <tr>
         <td>Victory Condition</td>
         <td><span style="color:deepskyblue">P2</span></td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td rowspan="3">Player Feedback</td>
         <td>HUD Elements</td>
         <td>P3</td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Chat Messages</td>
         <td>P3</td>
-        <td><input type="checkbox"/></td>
+        <td><input type="checkbox" checked/></td>
     </tr>
     <tr>
         <td>Scoreboard</td>

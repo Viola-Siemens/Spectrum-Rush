@@ -10,6 +10,7 @@ public class SpectrumRush {
 	public static final String MODID = "spectrum_rush";
 
 	public SpectrumRush() {
+		// 注册配置
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, SRCommonConfig.getSpec());
 	}
 }

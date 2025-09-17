@@ -16,6 +16,7 @@ public class SRCommonConfig {
 	public static final ForgeConfigSpec.IntValue COUNT_SHEEP_EACH_COLOR;
 	public static final ForgeConfigSpec.IntValue MAX_SPAWN_RADIUS;
 	public static final ForgeConfigSpec.ConfigValue<String> SUBTITLE_MESSAGE;
+	public static final ForgeConfigSpec.DoubleValue SHEEP_SPEED_MODIFIER;
 
 	static {
 		BUILDER.push("spectrum_rush-common-config");
@@ -38,6 +39,7 @@ public class SRCommonConfig {
 				COUNT_SHEEP_EACH_COLOR = BUILDER.comment("The count of sheep each color.").defineInRange("COUNT_SHEEP_EACH_COLOR", 10, 1, 100);
 				MAX_SPAWN_RADIUS = BUILDER.comment("The maximum spawn radius in blocks.").defineInRange("MAX_SPAWN_RADIUS", 160, 1, 1024);
 				SUBTITLE_MESSAGE = BUILDER.comment("The subtitle message when a round is started.").define("SUBTITLE_MESSAGE", "You have %d seconds to shear %s wools as many as possible.");
+				SHEEP_SPEED_MODIFIER = BUILDER.comment("The speed modifier of sheep. Positive values make sheep move faster and make the game more difficult.").defineInRange("SHEEP_SPEED_MODIFIER", -0.5D, -1.0D, 10.0D);
 			BUILDER.pop();
 		BUILDER.pop();
 

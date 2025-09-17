@@ -15,8 +15,8 @@ public class EatBlockGoalMixin {
 	private Mob mob;
 
 	/**
-	 * 修改羊吃东西的间隔时间
-	 * @param constant	50 或 1000
+	 * 修改羊吃草的间隔时间
+	 * @param constant	50 或 1000，分别对应幼年和成年羊的吃草间隔时间
 	 * @return 修改后的间隔时间
 	 */
 	@ModifyConstant(method = "canUse", constant = {@Constant(intValue = 50), @Constant(intValue = 1000)})

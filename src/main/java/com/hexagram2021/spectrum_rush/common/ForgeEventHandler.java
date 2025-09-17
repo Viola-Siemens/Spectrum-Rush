@@ -18,6 +18,10 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = SpectrumRush.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
+	/**
+	 * 阻止小游戏生成的实体被删除
+	 * @param event	事件
+	 */
 	@SubscribeEvent
 	public static void onEntityDespawn(MobSpawnEvent.AllowDespawn event) {
 		if(SRCommonConfig.STARTED.get() && event.getEntity().getSpawnType() == SRSpawnTypes.SPECTRUM_RUSH) {
@@ -25,6 +29,10 @@ public class ForgeEventHandler {
 		}
 	}
 
+	/**
+	 * 阻止小游戏过程中生成其他实体
+	 * @param event	事件
+	 */
 	@SubscribeEvent
 	public static void onEntitySpawn(MobSpawnEvent.FinalizeSpawn event) {
 		if(SRCommonConfig.STARTED.get() && event.getSpawnType() != SRSpawnTypes.SPECTRUM_RUSH) {
@@ -33,12 +41,20 @@ public class ForgeEventHandler {
 		}
 	}
 
+	/**
+	 * 注册命令
+	 * @param event	事件
+	 */
 	@SubscribeEvent
 	public static void onRegisterCommands(RegisterCommandsEvent event) {
 		CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 		dispatcher.register(SRCommands.register());
 	}
 
+	/**
+	 * 监听游戏世界每 tick 的更新，对应更新小游戏逻辑
+	 * @param event	事件
+	 */
 	@SubscribeEvent
 	public static void onLevelTick(TickEvent.LevelTickEvent event) {
 		if(event.side == LogicalSide.SERVER && event.phase == TickEvent.Phase.END && SRCommonConfig.STARTED.get() && event.level instanceof ServerLevel serverLevel && serverLevel.dimension() == Level.OVERWORLD) {

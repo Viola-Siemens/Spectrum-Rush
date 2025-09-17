@@ -5,6 +5,10 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 
 public class SRCommands {
+	/**
+	 * 注册命令
+	 * @return 命令
+	 */
 	public static LiteralArgumentBuilder<CommandSourceStack> register() {
 		return Commands.literal("spectrumrush").then(
 				Commands.literal("start")
